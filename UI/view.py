@@ -20,22 +20,39 @@ class View(ft.UserControl):
 
     def load_interface(self):
         # title
-        self._title = ft.Text("Hello World", color="blue", size=24)
+        self._title = ft.Text("simulazione ufo", color="blue", size=24)
         self._page.controls.append(self._title)
+
+        self.ddyear = ft.Dropdown(label="Anno")
+        self._controller.filanni()
+
+        self.btnavvistamenti = ft.ElevatedButton(text="avvistamenti", on_click=self._controller.avvistamenti)
+
+        row1 = ft.Row([self.ddyear,self.btnavvistamenti],
+                      alignment=ft.MainAxisAlignment.CENTER)
+        self._page.controls.append(row1)
+
+        self.ddstato=ft.Dropdown(label='Stato',width=500)
+        self.btntest = ft.ElevatedButton(text='analizza',on_click=self._controller.analizz,disabled=True)
+        self.percorso = ft.ElevatedButton(text='Sequenza',on_click=self._controller.seq,disabled=True)
+
+        row2 = ft.Row([self.ddstato,self.btntest,self.percorso],
+                      alignment=ft.MainAxisAlignment.CENTER)
+        self._page.controls.append(row2)
 
         #ROW with some controls
         # text field for the name
-        self.txt_name = ft.TextField(
+        '''self.txt_name = ft.TextField(
             label="name",
             width=200,
             hint_text="Insert a your name"
-        )
+        )'''
 
         # button for the "hello" reply
-        self.btn_hello = ft.ElevatedButton(text="Hello", on_click=self._controller.handle_hello)
+        '''self.btn_hello = ft.ElevatedButton(text="Hello", on_click=self._controller.handle_hello)
         row1 = ft.Row([self.txt_name, self.btn_hello],
                       alignment=ft.MainAxisAlignment.CENTER)
-        self._page.controls.append(row1)
+        self._page.controls.append(row1)'''
 
         # List View where the reply is printed
         self.txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
